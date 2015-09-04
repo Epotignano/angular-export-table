@@ -1,9 +1,28 @@
 # angular-export-table
 Allow us us to export an HTML table to different types of documents.
 
-### Way of use
 
-#### As dropdown
+
+
+### table-export directive
+Can be used as Class, attribute or element.
+
+#### Params
+
+1. table-selector **String** : is a jQuery or JQLite Selector
+2. export-options **Object** :
+   1. {
+        separator: ','
+        ignoreColumn: [2,3],
+        tableName:'yourTableName'
+        type:'csv'
+        pdfFontSize:14
+        pdfLeftMargin:20
+        escape:'true'
+        htmlContent:'false'
+        consoleLog:'false'
+     }
+
 
 ```
 <div class="row pull-right">
@@ -13,23 +32,6 @@ Allow us us to export an HTML table to different types of documents.
      </button>
  </div>
 ```
-
-### table-export directive
-Can be used as Class, attribute or element.
-
-#### Params
-
-1. table-selector **String** : is a jQuery or JQLite Selector
-2. export-options **Object** :
-   1.separator: ','
-     ignoreColumn: [2,3],
-     tableName:'yourTableName'
-     type:'csv'
-     pdfFontSize:14
-     pdfLeftMargin:20
-     escape:'true'
-     htmlContent:'false'
-     consoleLog:'false'
 
 ### te-option directive
 
