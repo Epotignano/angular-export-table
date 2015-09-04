@@ -1,0 +1,29 @@
+{
+  "name": "angular-table-export",
+  "version": "0.1.0",
+  "authors": [
+    "epotignano <epotignano@gmail.com>"
+  ],
+  "description": "directive that allows us to export HTML tables",
+  "main": "/export/tableExportDirective.js",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals"
+  ],
+  "keywords": [
+    "Angular",
+    "tables",
+    "HTML",
+    "table",
+    "export"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
