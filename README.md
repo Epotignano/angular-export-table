@@ -2,7 +2,33 @@
 Allow us us to export an HTML table to different types of documents.
 
 
+### Installation
 
+```
+    bower install --save angular-export-table
+```
+
+by now, due that is very recent version, if you're using grunt or something else, still you have to add the next files by hand
+*I will solve it asap*
+
+```
+    <script src="angular-export-table/export/tableExportDirective.js"></script>
+    <script src="angular-export-table/export/tableExportOptionDirective.js"></script>
+    <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/tableExport.js"></script>
+    <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/jquery.base64.js"></script>
+    <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/html2canvas.js"></script>
+    <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/jspdf/jspdf.js"></script>
+    <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/jspdf/libs/base64.js"></script>
+    <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/jspdf/libs/sprintf.js"></script>
+
+```
+
+
+after, add this dependency for your angular module as follows:
+
+```
+    angular.module('myApp', ['ceibo.components.table.export']);
+```
 
 ### table-export directive
 Can be used as Class, attribute or element.
