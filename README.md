@@ -30,6 +30,19 @@ after, add this dependency for your angular module as follows:
     angular.module('myApp', ['ceibo.components.table.export']);
 ```
 
+###Allowed formats
+
+    -JSON
+    -XML
+    -PNG
+    -CSV
+    -TXT
+    -SQL
+    -MS-Word
+    -Ms-Excel
+    -Ms-Powerpoint
+    -PDF
+
 ### table-export directive
 Can be used as Class, attribute or element.
 
