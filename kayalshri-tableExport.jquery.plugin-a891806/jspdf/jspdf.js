@@ -1,16 +1,16 @@
 /**
  * jsPDF
  * (c) 2009 James Hall
- * 
+ *
  * Some parts based on FPDF.
  */
 
 var jsPDF = function(){
-	
+
 	// Private properties
 	var version = '20090504';
 	var buffer = '';
-	
+
 	var pdfVersion = '1.3'; // PDF Version
 	var defaultPageFormat = 'a4';
 	var pageFormats = { // Size in mm of various paper formats
@@ -35,7 +35,7 @@ var jsPDF = function(){
 	var fontSize = 16; // Default font size
 	var pageFontSize = 16;
 
-	// Initilisation 
+	// Initilisation
 	if (unit == 'pt') {
 		k = 1;
 	} else if(unit == 'mm') {
@@ -45,22 +45,22 @@ var jsPDF = function(){
 	} else if(unit == 'in') {
 		k = 72;
 	}
-	
+
 	// Private functions
 	var newObject = function() {
 		//Begin a new object
 		objectNumber ++;
 		offsets[objectNumber] = buffer.length;
-		out(objectNumber + ' 0 obj');		
+		out(objectNumber + ' 0 obj');
 	}
-	
-	
+
+
 	var putHeader = function() {
 		out('%PDF-' + pdfVersion);
 	}
-	
+
 	var putPages = function() {
-		
+
 		// TODO: Fix, hardcoded to a4 portrait
 		var wPt = pageWidth * k;
 		var hPt = pageHeight * k;
@@ -68,17 +68,17 @@ var jsPDF = function(){
 		for(n=1; n <= page; n++) {
 			newObject();
 			out('<</Type /Page');
-			out('/Parent 1 0 R');	
+			out('/Parent 1 0 R');
 			out('/Resources 2 0 R');
 			out('/Contents ' + (objectNumber + 1) + ' 0 R>>');
 			out('endobj');
-			
+
 			//Page content
 			p = pages[n];
 			newObject();
 			out('<</Length ' + p.length  + '>>');
 			putStream(p);
-			out('endobj');					
+			out('endobj');
 		}
 		offsets[1] = buffer.length;
 		out('1 0 obj');
@@ -91,19 +91,19 @@ var jsPDF = function(){
 		out('/Count ' + page);
 		out(sprintf('/MediaBox [0 0 %.2f %.2f]', wPt, hPt));
 		out('>>');
-		out('endobj');		
+		out('endobj');
 	}
-	
+
 	var putStream = function(str) {
 		out('stream');
 		out(str);
 		out('endstream');
 	}
-	
+
 	var putResources = function() {
 		putFonts();
 		putImages();
-		
+
 		//Resource dictionary
 		offsets[2] = buffer.length;
 		out('2 0 obj');
@@ -111,8 +111,8 @@ var jsPDF = function(){
 		putResourceDictionary();
 		out('>>');
 		out('endobj');
-	}	
-	
+	}
+
 	var putFonts = function() {
 		// TODO: Only supports core font hardcoded to Helvetica
 		newObject();
@@ -125,11 +125,11 @@ var jsPDF = function(){
 		out('>>');
 		out('endobj');
 	}
-	
+
 	var putImages = function() {
 		// TODO
 	}
-	
+
 	var putResourceDictionary = function() {
 		out('/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]');
 		out('/Font <<');
@@ -141,13 +141,13 @@ var jsPDF = function(){
 		putXobjectDict();
 		out('>>');
 	}
-	
+
 	var putXobjectDict = function() {
 		// TODO
 		// Loop through images
 	}
-	
-	
+
+
 	var putInfo = function() {
 		out('/Producer (jsPDF ' + version + ')');
 		if(documentProperties.title != undefined) {
@@ -164,7 +164,7 @@ var jsPDF = function(){
 		}
 		if(documentProperties.creator != undefined) {
 			out('/Creator (' + pdfEscape(documentProperties.creator) + ')');
-		}		
+		}
 		var created = new Date();
 		var year = created.getFullYear();
 		var month = (created.getMonth() + 1);
@@ -174,26 +174,26 @@ var jsPDF = function(){
 		var second = created.getSeconds();
 		out('/CreationDate (D:' + sprintf('%02d%02d%02d%02d%02d%02d', year, month, day, hour, minute, second) + ')');
 	}
-	
+
 	var putCatalog = function () {
 		out('/Type /Catalog');
 		out('/Pages 1 0 R');
 		// TODO: Add zoom and layout modes
 		out('/OpenAction [3 0 R /FitH null]');
 		out('/PageLayout /OneColumn');
-	}	
-	
+	}
+
 	function putTrailer() {
 		out('/Size ' + (objectNumber + 1));
 		out('/Root ' + objectNumber + ' 0 R');
 		out('/Info ' + (objectNumber - 1) + ' 0 R');
-	}	
-	
+	}
+
 	var endDocument = function() {
 		state = 1;
 		putHeader();
 		putPages();
-		
+
 		putResources();
 		//Info
 		newObject();
@@ -201,14 +201,14 @@ var jsPDF = function(){
 		putInfo();
 		out('>>');
 		out('endobj');
-		
+
 		//Catalog
 		newObject();
 		out('<<');
 		putCatalog();
 		out('>>');
 		out('endobj');
-		
+
 		//Cross-ref
 		var o = buffer.length;
 		out('xref');
@@ -225,20 +225,20 @@ var jsPDF = function(){
 		out('startxref');
 		out(o);
 		out('%%EOF');
-		state = 3;		
+		state = 3;
 	}
-	
+
 	var beginPage = function() {
 		page ++;
 		// Do dimension stuff
 		state = 2;
 		pages[page] = '';
-		
+
 		// TODO: Hardcoded at A4 and portrait
 		pageHeight = pageFormats['a4'][1] / k;
 		pageWidth = pageFormats['a4'][0] / k;
 	}
-	
+
 	var out = function(string) {
 		if(state == 2) {
 			pages[page] += string + '\n';
@@ -246,26 +246,26 @@ var jsPDF = function(){
 			buffer += string + '\n';
 		}
 	}
-	
+
 	var _addPage = function() {
 		beginPage();
 		// Set line width
 		out(sprintf('%.2f w', (lineWidth * k)));
-		
+
 		// Set font - TODO
 		// 16 is the font size
 		pageFontSize = fontSize;
-		out('BT /F1 ' + parseInt(fontSize) + '.00 Tf ET'); 		
+		out('BT /F1 ' + parseInt(fontSize) + '.00 Tf ET');
 	}
-	
+
 	// Add the first page automatically
-	_addPage();	
+	_addPage();
 
 	// Escape text
 	var pdfEscape = function(text) {
 		return text.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
 	}
-	
+
 	return {
 		addPage: function() {
 			_addPage();
@@ -283,7 +283,7 @@ var jsPDF = function(){
 			documentProperties = properties;
 		},
 		addImage: function(imageData, format, x, y, w, h) {
-		
+
 		},
 		output: function(type, options) {
 			endDocument();
@@ -291,7 +291,11 @@ var jsPDF = function(){
 				return buffer;
 			}
 			if(type == 'datauri') {
-				document.location.href = 'data:application/pdf;base64,' + Base64.encode(buffer);
+				var pdf = document.createElement("a");
+				pdf.target = '_blank'; // comment this line to open the .pdf in the same window
+				pdf.download = 'table.pdf'; // comment this line to not-download the .pdf directly
+				pdf.href = 'data:application/pdf;base64,' + Base64.encode(buffer);
+				pdf.click();
 			}
 			// @TODO: Add different output options
 		},
