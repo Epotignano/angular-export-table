@@ -18,7 +18,7 @@ var tableExportCtrl = function($element, $attrs, $document) {
     function exportTable() {
         ctrl.tableElement.tableExport({
             type: elementScope.ctrl.exportOptions.type || defaultOptions.type,
-            escape: elementScope.ctrl.exportOptions.escape || defaultOptions.escape
+            escape: elementScope.ctrl.exportOptions.escape || defaultOptions.escape,
             tableName: elementScope.ctrl.exportOptions.tableName || defaultOptions.tableName
         })
     }
