@@ -11,13 +11,15 @@ var tableExportCtrl = function($element, $attrs, $document) {
 
     var defaultOptions = {
         type: 'pdf',
-        escape: false
+        escape: false,
+        tableName: 'table'
     };
 
     function exportTable() {
         ctrl.tableElement.tableExport({
             type: elementScope.ctrl.exportOptions.type || defaultOptions.type,
             escape: elementScope.ctrl.exportOptions.escape || defaultOptions.escape
+            tableName: elementScope.ctrl.exportOptions.tableName || defaultOptions.tableName
         })
     }
 

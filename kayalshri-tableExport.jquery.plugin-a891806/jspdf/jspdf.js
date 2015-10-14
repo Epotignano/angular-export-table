@@ -20,6 +20,7 @@ var jsPDF = function(){
 		'letter': [612, 792],
 		'legal': [612, 1008]
 	};
+	var pdfName = 'table';
 	var textColor = '0 g';
 	var page = 0;
 	var objectNumber = 2; // 'n' Current object number
@@ -293,7 +294,7 @@ var jsPDF = function(){
 			if(type == 'datauri') {
 				var pdf = document.createElement("a");
 				pdf.target = '_blank'; // comment this line to open the .pdf in the same window
-				pdf.download = 'table.pdf'; // comment this line to not-download the .pdf directly
+				pdf.download = pdfName // comment this line to not-download the .pdf directly
 				pdf.href = 'data:application/pdf;base64,' + Base64.encode(buffer);
 				pdf.click();
 			}
@@ -301,7 +302,11 @@ var jsPDF = function(){
 		},
 		setFontSize: function(size) {
 			fontSize = size;
+		},
+		setPdfName: function(name) {
+			pdfName = name;
 		}
+
 	}
 
 };

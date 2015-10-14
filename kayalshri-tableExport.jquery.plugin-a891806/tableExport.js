@@ -78,7 +78,7 @@ THE SOFTWARE.*/
 
 					var doc = document.createElement("a");
 					doc.target = '_blank';
-					doc.download = 'table.'+defaults.type;
+					doc.download = defaults.tableName+defaults.type;
 					doc.href = 'data:application/'+defaults.type+';filename=exportData;'+base64data;
 					doc.click();
 
@@ -286,7 +286,7 @@ THE SOFTWARE.*/
 
 					var xls = document.createElement("a");
 					xls.target = '_blank';
-					xls.download = 'table.xls';
+					xls.download = defaults.tableName+'.xls';
 					xls.href = 'data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;'+base64data;
 					xls.click();
 
@@ -303,6 +303,7 @@ THE SOFTWARE.*/
 
 					var doc = new jsPDF('p','pt', 'a4', true);
 					doc.setFontSize(defaults.pdfFontSize);
+					doc.setPdfName(defaults.tableName);
 
 					// Header
 					var startColPosition=defaults.pdfLeftMargin;
