@@ -26,7 +26,7 @@ THE SOFTWARE.*/
                 var defaults = {
 						separator: ',',
 						ignoreColumn: [],
-						tableName:'yourTableName',
+						tableName:'table',
 						type:'csv',
 						pdfFontSize:14,
 						pdfLeftMargin:20,
@@ -75,7 +75,13 @@ THE SOFTWARE.*/
 						console.log(tdData);
 					}
 					var base64data = "base64," + $.base64.encode(tdData);
-					window.open('data:application/'+defaults.type+';filename=exportData;' + base64data);
+
+					var doc = document.createElement("a");
+					doc.target = '_blank';
+					doc.download = 'table.'+defaults.type;
+					doc.href = 'data:application/'+defaults.type+';filename=exportData;'+base64data;
+					doc.click();
+
 				}else if(defaults.type == 'sql'){
 
 					// Header
@@ -276,7 +282,13 @@ THE SOFTWARE.*/
 					excelFile += "</html>";
 
 					var base64data = "base64," + $.base64.encode(excelFile);
-                    $('<a style="display:none" href="data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;'+base64data+'" download="'+defaults.tableName.toString()+'.xls"><span></span></a>').appendTo(document.body).find('span').trigger("click").parent().remove();
+					//window.open('data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;' + base64data);
+
+					var xls = document.createElement("a");
+					xls.target = '_blank';
+					xls.download = 'table.xls';
+					xls.href = 'data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;'+base64data;
+					xls.click();
 
 				}else if(defaults.type == 'png'){
 					html2canvas($(el), {
@@ -356,4 +368,3 @@ THE SOFTWARE.*/
 			}
         });
     })(jQuery);
-
