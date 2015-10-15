@@ -78,7 +78,7 @@ THE SOFTWARE.*/
 
 					var doc = document.createElement("a");
 					doc.target = '_blank';
-					doc.download = defaults.tableName+defaults.type;
+					doc.download = defaults.tableName+'.'+defaults.type;
 					doc.href = 'data:application/'+defaults.type+';filename=exportData;'+base64data;
 					doc.click();
 
