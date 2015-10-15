@@ -28,7 +28,7 @@ THE SOFTWARE.*/
 						ignoreColumn: [],
 						tableName:'table',
 						type:'csv',
-						pdfFontSize:14,
+						pdfFontSize:12,
 						pdfLeftMargin:20,
 						escape:'true',
 						htmlContent:'false',
