@@ -1,0 +1,71 @@
+<!-- Export options -->
+<div class="row pull-right">
+    <div class="dropdown">
+        <button class="btn btn-lg btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Export <span class="caret"></span>
+        </button>
+
+        <ul class="table-export dropdown-menu"
+        table-selector="'auxTable'"
+        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'Aanhefs' }"
+        aria-labelledby="dropdownMenu1">
+            <li te-option te-value="'pdf'" te-param="'type'">
+                <a href="">PDF</a>
+            </li>
+
+            <li te-option te-value="'excel'" te-param="'type'">
+                <a href="">Excel</a>
+            </li>
+
+            <li te-option te-value="'csv'" te-param="'type'">
+                <a href="">CSV</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Export shown table -->
+<table st-table="LIST_ELEMENTS" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ATRIB_NAME_1</th>
+            <th>ATRIB_NAME_2</th>
+            <th>ATRIB_NAME_3</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in LIST_ELEMENTS">
+            <td>{{item.ATRIB_NAME_1}}</td>
+            <td>{{item.ATRIB_NAME_2}}</td>
+            <td>{{item.ATRIB_NAME_3}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Auxiliar Table with All the content to export -->
+<table id="auxTable" style="opacity: 0; position: absolute;">
+    <thead>
+        <tr>
+            <th>ATRIB_NAME_1</th>
+            <th>ATRIB_NAME_2</th>
+            <th>ATRIB_NAME_3</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in filteredCollection">
+            <td>{{item.ATRIB_NAME_1}}</td>
+            <td>{{item.ATRIB_NAME_2}}</td>
+            <td>{{item.ATRIB_NAME_3}}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+

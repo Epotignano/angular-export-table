@@ -6,7 +6,7 @@ var teOptionCtrl = function($scope, $element, $attrs) {
     var elementScope = $element.isolateScope().ctrl;
 
     $element.on('click', function(e){
-        console.log($scope);
+        //console.log($scope);
         elementScope.tableExportCtrl.setProperty('exportOptions', elementScope.teParam,elementScope.teValue);
         elementScope.tableExportCtrl.exportTableFn()
     })

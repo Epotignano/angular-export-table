@@ -1,5 +1,5 @@
 {
-  "name": "angular-table-export",
+  "name": "angular-export-table",
   "version": "0.1.0",
   "authors": [
     "epotignano <epotignano@gmail.com>"
@@ -25,5 +25,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-smart-table": "~2.1.3"
+  }
 }

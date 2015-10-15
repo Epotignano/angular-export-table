@@ -34,7 +34,8 @@ var tableExportCtrl = function($element, $attrs, $document) {
 
 
     if(elementScope.ctrl.tableSelector) {
-        ctrl.tableElement = $document.find(elementScope.ctrl.tableSelector);
+        ctrl.tableElement = $('#'+elementScope.ctrl.tableSelector);
+        //ctrl.tableElement = document.getElementById(elementScope.ctrl.tableSelector).value;
     }
 
     //TODO allow to define diiferents methods
