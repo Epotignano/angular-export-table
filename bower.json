@@ -5,7 +5,16 @@
     "epotignano <epotignano@gmail.com>"
   ],
   "description": "directive that allows us to export HTML tables",
-  "main": "/export/tableExportDirective.js",
+  "main": [
+      "export/table-export-directive.js",
+      "export/table-export-option-directive.js",
+      "kayalshri-table-export.jquery.plugin-a891806/table-export.js",
+      "kayalshri-table-export.jquery.plugin-a891806/jquery.base64.js",
+      "kayalshri-table-export.jquery.plugin-a891806/html2canvas.js",
+      "kayalshri-table-export.jquery.plugin-a891806/jspdf/jspdf.js",
+      "kayalshri-table-export.jquery.plugin-a891806/jspdf/libs/base64.js",
+      "kayalshri-table-export.jquery.plugin-a891806/jspdf/libs/sprintf.js"
+  ],
   "moduleType": [
     "amd",
     "es6",
