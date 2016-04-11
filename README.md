@@ -44,17 +44,16 @@ To use the module, add it to your angular application as follows:
 ```
     angular.module('myApp', ['ceibo.components.table.export']);
 ```
-To export data from a table, insert the directive `table-export` in the element that will be used to trigger the export, as well as the directive `export-options` with the parameters needed for the export, for example:
+Insert the directive `table-export` into the element that will be used to trigger the export, usually a button.
+
+Use the directive `table-selector` to identify the table to be exported, and `export-options` to set the parameters used by the export:
 
 ```
-<div class="row pull-right">
- <div class="row">
-     <button class="table-export" table-selector="'myTableToExport'" export-options="{type: 'pdf', tableName: 'myExportedTable' }">
-         Export
-     </button>
- </div>
+<div class="row">
+   <button class="table-export" table-selector="'myTableToExport'" export-options="{type: 'pdf', tableName: 'myExportedTable' }">Export</button>
+</div>
 ```
-where 'myTableToExport' is the name of the JQuery or JQLite selector on the table to be exported `<table id="myTableToExport" class="table table-striped table-bordered">` and 'myExportedTable' is the name of the exported file.
+where 'myTableToExport' is the name of the JQuery or JQLite selector on the table to be exported, for example `<table id="myTableToExport" class="table table-striped table-bordered">`, and 'myExportedTable' is the name of the exported file.
 
 
 The `table-export` directive can be used as a class, attribute or element.
