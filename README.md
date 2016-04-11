@@ -1,5 +1,19 @@
 # angular-export-table
-Allow us us to export an HTML table to different types of documents.
+Allows you to export an HTML table to different types of document formats:
+
+    -CSV
+    -PDF
+    -JSON
+    -XML
+    -PNG
+    -TXT
+    -SQL
+    -MS Word
+    -MS Excel
+    -MS Powerpoint
+
+
+It is driven by Tableexport.jquery.plugin.
 
 
 ### Installation
@@ -8,7 +22,8 @@ Allow us us to export an HTML table to different types of documents.
     bower install --save angular-export-table
 ```
 
-by now, due that is very recent version, if you're using grunt or something else, still you have to add the next files by hand
+This is a very recent version so if you're using grunt or something else, you must add the following JavaScript files by hand.
+
 *I will solve it asap*
 
 ```
@@ -23,63 +38,49 @@ by now, due that is very recent version, if you're using grunt or something else
     <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/jspdf/libs/sprintf.js"></script>
 
 ```
-
-
-after, add this dependency for your angular module as follows:
+### Usage
+To use the module, add it to your angular application as follows:
 
 ```
     angular.module('myApp', ['ceibo.components.table.export']);
 ```
-
-###Allowed formats
-
-    -JSON
-    -XML
-    -PNG
-    -CSV
-    -TXT
-    -SQL
-    -MS-Word
-    -Ms-Excel
-    -Ms-Powerpoint
-    -PDF
-
-### table-export directive
-Can be used as Class, attribute or element.
-
-#### Params
-
-1. table-selector **String** : is a jQuery or JQLite Selector
-2. export-options **Object** :
-   1. {
-        separator: ','
-        ignoreColumn: [2,3],
-        tableName:'yourTableName'
-        type:'csv'
-        pdfFontSize:14
-        pdfLeftMargin:20
-        escape:'true'
-        htmlContent:'false'
-        consoleLog:'false'
-     }
-
+To export data from a table, insert the directive `table-export` in the element that will be used to trigger the export, as well as the directive `export-options` with the parameters needed for the export, for example:
 
 ```
 <div class="row pull-right">
  <div class="row">
-     <button class="table-export" table-selector="'table'" export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'Aanhefs' }">
+     <button class="table-export" table-selector="'myTableToExport'" export-options="{type: 'pdf', tableName: 'myExportedTable' }">
          Export
      </button>
  </div>
 ```
+where 'myTableToExport' is the name of the JQuery or JQLite selector on the table to be exported `<table id="myTableToExport" class="table table-striped table-bordered">` and 'myExportedTable' is the name of the exported file.
 
-### te-option directive
 
-allow us to define custom templetas as dropdown, when we put this directive in an HTML element, on click it will perform the export, modifying the specified
-properties assigned to **te-param** giving the value of **te-value**
+The `table-export` directive can be used as a class, attribute or element.
 
-####Example
+#### Export options
 
+The options for the export are as follows:
+```
+separator: ','
+ignoreColumn: [2,3],
+tableName:'myExportedTable'
+type:'csv'
+pdfFontSize:14
+pdfLeftMargin:20
+escape:'true'
+htmlContent:'false'
+consoleLog:'false'
+```
+
+### Directive `te-option`
+
+Allows you to modify the `export-options` by selecting the properties to be modified from a dropdown list.
+
+When the element is clicked, it will modify the property specified by `te-param` giving it the value of `te-value`.
+
+#### Example
 
 ```
 <div class="row pull-right">
@@ -105,6 +106,5 @@ properties assigned to **te-param** giving the value of **te-value**
 </div>
 ```
 
-###Based on
+### Based on
 https://github.com/kayalshri/tableExport.jquery.plugin
-
