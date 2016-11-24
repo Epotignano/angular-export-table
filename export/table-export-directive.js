@@ -16,6 +16,11 @@ var tableExportCtrl = function($element, $attrs, $document) {
     };
 
     function exportTable() {
+
+      if(elementScope.ctrl.tableSelector) {
+          ctrl.tableElement = $('#'+elementScope.ctrl.tableSelector);
+          //ctrl.tableElement = document.getElementById(elementScope.ctrl.tableSelector).value;
+      }
         ctrl.tableElement.tableExport({
             type: elementScope.ctrl.exportOptions.type || defaultOptions.type,
             escape: elementScope.ctrl.exportOptions.escape || defaultOptions.escape,
@@ -33,10 +38,7 @@ var tableExportCtrl = function($element, $attrs, $document) {
     }
 
 
-    if(elementScope.ctrl.tableSelector) {
-        ctrl.tableElement = $('#'+elementScope.ctrl.tableSelector);
-        //ctrl.tableElement = document.getElementById(elementScope.ctrl.tableSelector).value;
-    }
+
 
     //TODO allow to define diiferents methods
     $element.on('click', function(e){
