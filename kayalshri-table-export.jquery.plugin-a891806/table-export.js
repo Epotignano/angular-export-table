@@ -77,6 +77,7 @@ THE SOFTWARE.*/
 					var base64data = "base64," + $.base64.encode(tdData);
 
 					var doc = document.createElement("a");
+                                        document.body.appendChild(doc);
 					doc.target = '_blank';
 					doc.download = defaults.tableName+'.'+defaults.type;
 					doc.href = 'data:application/'+defaults.type+';filename=exportData;'+base64data;
@@ -285,6 +286,7 @@ THE SOFTWARE.*/
 					//window.open('data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;' + base64data);
 
 					var xls = document.createElement("a");
+                                        document.body.appendChild(xls);
 					xls.target = '_blank';
 					xls.download = defaults.tableName+'.xls';
 					xls.href = 'data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;'+base64data;
