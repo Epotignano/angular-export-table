@@ -36,8 +36,7 @@ THE SOFTWARE.*/
 				};
 
 				var options = $.extend(defaults, options),
-                                    el = this,
-                                    isIE = (navigator.userAgent.indexOf("MSIE") !== -1);
+                                    el = this;
 
 				if(defaults.type == 'csv' || defaults.type == 'txt'){
 
