@@ -35,8 +35,9 @@ THE SOFTWARE.*/
 						consoleLog:'false'
 				};
 
-				var options = $.extend(defaults, options);
-				var el = this;
+				var options = $.extend(defaults, options),
+                                    el = this,
+                                    isIE = (navigator.userAgent.indexOf("MSIE") !== -1);
 
 				if(defaults.type == 'csv' || defaults.type == 'txt'){
 
@@ -74,14 +75,23 @@ THE SOFTWARE.*/
 					if(defaults.consoleLog == 'true'){
 						console.log(tdData);
 					}
-					var base64data = "base64," + $.base64.encode(tdData);
+					var base64data = "base64," + $.base64.encode(tdData),
+                                            blob = new Blob([tdData], { type: 'text/csv' });
+                                    
+                                        if (window.navigator.msSaveBlob) { // // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+                                            window.navigator.msSaveOrOpenBlob(blob, 'exportData.csv');
+                                        }
+                                        else {
+                                            var doc = document.createElement("a");
+                                            document.body.appendChild(doc);
+                                            doc.target = '_blank';
+                                            doc.download = defaults.tableName+'.'+defaults.type;
+                                            doc.href = 'data:application/'+defaults.type+';filename=exportData;'+base64data;
+                                            doc.click();
+                                        }
 
-					var doc = document.createElement("a");
-                                        document.body.appendChild(doc);
-					doc.target = '_blank';
-					doc.download = defaults.tableName+'.'+defaults.type;
-					doc.href = 'data:application/'+defaults.type+';filename=exportData;'+base64data;
-					doc.click();
+                                      
+					
 
 				}else if(defaults.type == 'sql'){
 
@@ -282,15 +292,24 @@ THE SOFTWARE.*/
 					excelFile += "</body>";
 					excelFile += "</html>";
 
-					var base64data = "base64," + $.base64.encode(excelFile);
-					//window.open('data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;' + base64data);
+                                        //window.open('data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;' + base64data);
 
-					var xls = document.createElement("a");
-                                        document.body.appendChild(xls);
-					xls.target = '_blank';
-					xls.download = defaults.tableName+'.xls';
-					xls.href = 'data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;'+base64data;
-					xls.click();
+                                        var base64data = "base64," + $.base64.encode(excelFile),
+                                            blob = new Blob([excelFile], { type: 'xls' });
+                                    
+                                        if (window.navigator.msSaveBlob) { // // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+                                            window.navigator.msSaveOrOpenBlob(blob, 'exportData.xls');
+                                        }
+                                        else {
+                                            var xls = document.createElement("a");
+                                            document.body.appendChild(xls);
+                                            xls.target = '_blank';
+                                            xls.download = defaults.tableName+'.xls';
+                                            xls.href = 'data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;'+base64data;
+                                            xls.click();
+                                        }
+                                        
+					
 
 				}else if(defaults.type == 'png'){
 					html2canvas($(el), {
