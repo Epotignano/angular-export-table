@@ -12,8 +12,8 @@ by now, due that is very recent version, if you're using grunt or something else
 *I will solve it asap*
 
 ```
-    <script src="angular-export-table/export/tableExportDirective.js"></script>
-    <script src="angular-export-table/export/tableExportOptionDirective.js"></script>
+    <script src="angular-export-table/export/table-export-directive.js"></script>
+    <script src="angular-export-table/export/table-export-option-directive.js"></script>
     <script src="angular-export-table/export/smartTableDirectives.js"></script>
     <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/tableExport.js"></script>
     <script src="angular-export-table/kayalshri-tableExport.jquery.plugin-a891806/jquery.base64.js"></script>
